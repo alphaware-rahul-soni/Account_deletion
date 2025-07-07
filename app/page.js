@@ -47,12 +47,12 @@ export default function Home() {
         const userExist = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/userexist`, session.user);
         if (userExist.data.success) {
           toast.success("User exist.");
-          console.log('this is the user details', userExist.data.data);
           setUserDetails(userExist.data.data);
           setUserExist(true);
         }
         else {
-          toast.error("no! user does not exist.")
+          toast.error("user does not exist.");
+          signOut()
         }
       }
       catch (error) {
@@ -66,8 +66,7 @@ export default function Home() {
     }
   }, [session])
 
-  console.log("this is the session ", termsandServices);
-
+  
   return (
     <div className='min-h-screen w-full  inset-0 z-50  flex items-center justify-center'>
 
